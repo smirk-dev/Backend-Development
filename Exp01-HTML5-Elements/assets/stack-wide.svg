@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300" role="img" aria-label="Four layers of a backend stack: browser, server, application, database">
+  <rect width="800" height="300" fill="#14212e"/>
+  <g font-family="Georgia, serif" fill="#f4f1ea">
+    <text x="40" y="52" font-size="21">The request travels down, the response climbs back up</text>
+  </g>
+  <g font-family="Consolas, monospace" font-size="14">
+    <rect x="40" y="82" width="720" height="42" fill="#1d2f40" stroke="#33506a"/>
+    <text x="60" y="108" fill="#f4f1ea">Browser</text>
+    <text x="700" y="108" fill="#8fa6bd" text-anchor="end">HTML · CSS · JS</text>
+
+    <rect x="40" y="134" width="720" height="42" fill="#1d2f40" stroke="#33506a"/>
+    <text x="60" y="160" fill="#f4f1ea">HTTP server</text>
+    <text x="700" y="160" fill="#8fa6bd" text-anchor="end">routing · headers</text>
+
+    <rect x="40" y="186" width="720" height="42" fill="#1d2f40" stroke="#33506a"/>
+    <text x="60" y="212" fill="#f4f1ea">Application</text>
+    <text x="700" y="212" fill="#8fa6bd" text-anchor="end">logic · templates</text>
+
+    <rect x="40" y="238" width="720" height="42" fill="#24313d" stroke="#9c4221"/>
+    <text x="60" y="264" fill="#f4f1ea">Database</text>
+    <text x="700" y="264" fill="#c98a67" text-anchor="end">rows · documents</text>
+  </g>
+  <g stroke="#9c4221" stroke-width="2" fill="none">
+    <path d="M20 92 L20 272" stroke-dasharray="4 5"/>
+    <path d="M20 272 l-5 -8 M20 272 l5 -8"/>
+  </g>
+</svg>

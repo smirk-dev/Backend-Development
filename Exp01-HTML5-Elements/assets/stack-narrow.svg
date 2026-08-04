@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260" role="img" aria-label="Backend stack layers, compact version for small screens">
+  <rect width="400" height="260" fill="#14212e"/>
+  <text x="24" y="42" font-family="Georgia, serif" font-size="18" fill="#f4f1ea">Backend stack</text>
+  <g font-family="Consolas, monospace" font-size="13" fill="#f4f1ea">
+    <rect x="24" y="62" width="352" height="38" fill="#1d2f40" stroke="#33506a"/>
+    <text x="40" y="86">Browser</text>
+    <rect x="24" y="108" width="352" height="38" fill="#1d2f40" stroke="#33506a"/>
+    <text x="40" y="132">HTTP server</text>
+    <rect x="24" y="154" width="352" height="38" fill="#1d2f40" stroke="#33506a"/>
+    <text x="40" y="178">Application</text>
+    <rect x="24" y="200" width="352" height="38" fill="#24313d" stroke="#9c4221"/>
+    <text x="40" y="224">Database</text>
+  </g>
+</svg>

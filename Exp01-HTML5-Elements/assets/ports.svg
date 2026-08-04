@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 150" width="600" height="150" role="img" aria-label="Three services and the ports they listen on">
+  <rect width="600" height="150" fill="#fbf9f4" stroke="#e6e0d4"/>
+  <g font-family="Consolas, monospace" font-size="13">
+    <rect x="20" y="42" width="170" height="66" fill="#fff" stroke="#1c1b19" stroke-width="1.5"/>
+    <text x="105" y="72" text-anchor="middle" fill="#1c1b19">API</text>
+    <text x="105" y="92" text-anchor="middle" fill="#9c4221">:3000</text>
+
+    <rect x="215" y="42" width="170" height="66" fill="#fff" stroke="#1c1b19" stroke-width="1.5"/>
+    <text x="300" y="72" text-anchor="middle" fill="#1c1b19">PostgreSQL</text>
+    <text x="300" y="92" text-anchor="middle" fill="#9c4221">:5432</text>
+
+    <rect x="410" y="42" width="170" height="66" fill="#fff" stroke="#1c1b19" stroke-width="1.5"/>
+    <text x="495" y="72" text-anchor="middle" fill="#1c1b19">Redis</text>
+    <text x="495" y="92" text-anchor="middle" fill="#9c4221">:6379</text>
+  </g>
+  <text x="20" y="28" font-family="Georgia, serif" font-size="14" font-style="italic" fill="#736f66">Ports on my machine during lab</text>
+  <text x="20" y="132" font-family="Georgia, serif" font-size="12" fill="#736f66">Each box is a clickable region defined with &lt;area&gt;.</text>
+</svg>

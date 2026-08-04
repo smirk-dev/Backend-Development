@@ -1,0 +1,30 @@
+# OS / editor cruft
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+.vscode/
+.idea/
+
+# OneDrive conflict copies
+*-conflicted*
+*(conflicted copy)*
+
+# Node, if a later experiment needs it
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.env
+.env.*
+!.env.example
+
+# Python, if a later experiment needs it
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Build output
+dist/
+build/

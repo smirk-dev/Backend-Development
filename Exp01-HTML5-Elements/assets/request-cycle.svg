@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 240" width="720" height="240" role="img" aria-label="Diagram of one request cycle from client to server to database and back">
+  <rect width="720" height="240" fill="#fbf9f4"/>
+  <g font-family="Consolas, monospace" font-size="13" fill="#1c1b19">
+    <rect x="24" y="80" width="150" height="70" fill="#fff" stroke="#1c1b19" stroke-width="1.5"/>
+    <text x="99" y="112" text-anchor="middle">Client</text>
+    <text x="99" y="132" text-anchor="middle" fill="#736f66" font-size="11">form submit</text>
+
+    <rect x="285" y="80" width="150" height="70" fill="#fff" stroke="#1c1b19" stroke-width="1.5"/>
+    <text x="360" y="112" text-anchor="middle">Server</text>
+    <text x="360" y="132" text-anchor="middle" fill="#736f66" font-size="11">route + validate</text>
+
+    <rect x="546" y="80" width="150" height="70" fill="#fff" stroke="#9c4221" stroke-width="1.5"/>
+    <text x="621" y="112" text-anchor="middle">Database</text>
+    <text x="621" y="132" text-anchor="middle" fill="#736f66" font-size="11">insert row</text>
+  </g>
+  <g stroke="#1c1b19" stroke-width="1.5" fill="none">
+    <path d="M174 100 L279 100"/>
+    <path d="M279 100 l-8 -4 M279 100 l-8 4" fill="#1c1b19"/>
+    <path d="M435 100 L540 100"/>
+    <path d="M435 100 l8 -4 M435 100 l8 4" transform="translate(105,0)"/>
+  </g>
+  <g stroke="#9c4221" stroke-width="1.5" fill="none" stroke-dasharray="5 4">
+    <path d="M540 132 L435 132"/>
+    <path d="M435 132 l8 -4 M435 132 l8 4"/>
+    <path d="M279 132 L174 132"/>
+    <path d="M174 132 l8 -4 M174 132 l8 4"/>
+  </g>
+  <g font-family="Consolas, monospace" font-size="11" fill="#736f66">
+    <text x="226" y="92" text-anchor="middle">POST</text>
+    <text x="487" y="92" text-anchor="middle">query</text>
+    <text x="226" y="152" text-anchor="middle" fill="#9c4221">201 Created</text>
+    <text x="487" y="152" text-anchor="middle" fill="#9c4221">result</text>
+  </g>
+  <text x="24" y="42" font-family="Georgia, serif" font-size="19" fill="#1c1b19">One request, start to finish</text>
+  <text x="24" y="212" font-family="Georgia, serif" font-size="13" fill="#736f66" font-style="italic">Drawn by hand in SVG so the page works with the network switched off.</text>
+</svg>

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Experiment 1 for Backend Development lab — one page built from the HTML5 element set, written by hand and kept semantic.">
+  <meta name="author" content="Suryansh">
+  <meta name="color-scheme" content="light">
+  <base target="_self">
+  <title>Exp 01 — Every HTML5 element I could justify using</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Kept here on purpose: the <style> element is part of the element list too.
+       Everything else lives in css/style.css. */
+    .note-inline { border-left: 2px solid var(--accent); padding-left: .9rem; }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#overview">Skip to content</a>
+
+  <header class="page-head">
+    <hgroup>
+      <h1>Every HTML5 element I could justify using</h1>
+      <p class="tagline">Experiment 1 &mdash; one page, no framework, no copy-pasted template.</p>
+    </hgroup>
+
+    <p class="stamp">
+      <span>Backend Development &middot; CSFS3008P</span>
+      <span>B.Tech Full Stack &middot; Semester 5</span>
+      <span>Submitted <time datetime="2026-08-04">4 August 2026</time></span>
+    </p>
+
+    <nav aria-label="Sections of this page">
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#text">Text</a></li>
+        <li><a href="#lists">Lists</a></li>
+        <li><a href="#table">Table</a></li>
+        <li><a href="#media">Media</a></li>
+        <li><a href="#form">Form</a></li>
+        <li><a href="#interactive">Interactive</a></li>
+        <li><a href="#checklist">Checklist</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ========== 01 ========== -->
+    <section id="overview">
+      <p class="marker">§ 01</p>
+      <h2>What this page is</h2>
+
+      <p>
+        The brief was to build a web page using every HTML5 element I could. The tempting
+        version of that is a wall of tags with no meaning attached, so I wrote something
+        I would actually keep: notes from the first backend lab, marked up with the element
+        that fits each piece of content rather than a <code>&lt;div&gt;</code> for everything.
+      </p>
+
+      <p>
+        <dfn id="semantic-html">Semantic HTML</dfn> is the idea behind that choice &mdash; a tag
+        should say what the content <em>is</em>, not how it should look. A screen reader can jump
+        between <code>&lt;section&gt;</code> landmarks; it cannot do anything useful with a
+        styled <code>&lt;div&gt;</code>. The same reasoning shows up on the server side, where an
+        <abbr title="Application Programming Interface">API</abbr> response is only as useful as
+        the structure it carries.
+      </p>
+
+      <aside class="margin-note">
+        <p>
+          Everything here is local. No CDN, no placeholder image service, no font download.
+          Pull the Wi-Fi and the page still renders exactly the same.
+        </p>
+      </aside>
+
+      <blockquote cite="https://html.spec.whatwg.org/multipage/">
+        <p>Use the element that best matches the meaning of the content, not the one that
+        looks closest to what you want.</p>
+        <footer>Paraphrased from the <cite>HTML Living Standard</cite></footer>
+      </blockquote>
+
+      <p class="note-inline">
+        A short version of the rule my instructor kept repeating:
+        <q>if you are reaching for a div, you have probably not read the spec yet.</q>
+      </p>
+    </section>
+
+    <!-- ========== 02 ========== -->
+    <section id="text">
+      <p class="marker">§ 02</p>
+      <h2>Text, and the twenty ways to mark it up</h2>
+
+      <article>
+        <h3>Emphasis and importance</h3>
+        <p>
+          <strong>Validate on the server.</strong> Client-side checks are a courtesy to the user,
+          not a defence &mdash; anyone can <em>skip the browser entirely</em> and post to the endpoint
+          with curl. <b>Bold</b> and <i>italic</i> exist for the cases where you want the look without
+          the meaning, which is rarer than people think. <mark>This line is highlighted</mark> because
+          I lost marks over it once. <u class="spell">recieve</u> is how I keep spelling
+          <span lang="en">receive</span>, and <s>promises everywhere</s> gave way to async/await
+          about a year into learning this.
+        </p>
+        <p>
+          <small>Small text is for the fine print, not for making things fit.</small>
+        </p>
+      </article>
+
+      <article>
+        <h3>Edits, code and machine-readable bits</h3>
+        <p>
+          The lab sheet said <del datetime="2026-07-28">store the password directly</del>
+          <ins datetime="2026-07-29" cite="#form">store a bcrypt hash of it</ins> &mdash; both marked
+          up as an actual revision rather than as strikethrough styling.
+        </p>
+        <p>
+          Run <code>npm run dev</code>, then hit <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd> to
+          watch the request in DevTools. If the port is busy the terminal answers with
+          <samp>EADDRINUSE: address already in use :::3000</samp>, where the variable part
+          <var>PORT</var> comes from the environment.
+        </p>
+
+        <pre><code>app.post('/register', async (req, res) =&gt; {
+  const { email } = req.body;
+  if (!email) return res.status(422).json({ error: 'email required' });
+  await db.users.insert({ email });
+  res.status(201).end();
+});</code></pre>
+
+        <p>
+          The lab had <data value="34">thirty-four</data> students registered and the deadline was
+          <time datetime="2026-08-04T23:59">4 August, 11:59 pm</time>. Water is
+          H<sub>2</sub>O and the query cost me O(n<sup>2</sup>) until I added the index.
+        </p>
+      </article>
+
+      <article>
+        <h3>The elements nobody uses until an exam asks</h3>
+        <p>
+          Ruby annotation, for glossing a word with its reading:
+          <ruby>सर्वर<rp>(</rp><rt>server</rt><rp>)</rp></ruby>.
+        </p>
+        <p>
+          Bidirectional override forces direction the other way:
+          <bdo dir="rtl">this sentence is reversed by the browser</bdo>.
+          Isolation keeps a user-supplied name from breaking the sentence around it &mdash;
+          <bdi>إسماعيل</bdi> scored 92, <bdi>Ananya</bdi> scored 88.
+        </p>
+        <p>
+          A long identifier gets a hint about where it may break:
+          <code>UserRegistration<wbr>Controller<wbr>ValidationError</code>.
+        </p>
+        <hr>
+        <address>
+          Written by Suryansh<br>
+          School of Computer Science, UPES<br>
+          <a href="mailto:suryansh@inboxkit.com">suryansh@inboxkit.com</a>
+        </address>
+      </article>
+    </section>
+
+    <!-- ========== 03 ========== -->
+    <section id="lists">
+      <p class="marker">§ 03</p>
+      <h2>Three kinds of list, three different jobs</h2>
+
+      <h3>Unordered &mdash; things with no sequence</h3>
+      <ul>
+        <li>Languages I have written a server in
+          <ul>
+            <li>JavaScript (Node)</li>
+            <li>Python</li>
+            <li>Go, once, badly</li>
+          </ul>
+        </li>
+        <li>Databases on this machine
+          <ul>
+            <li>PostgreSQL</li>
+            <li>MongoDB</li>
+            <li>Redis</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Ordered &mdash; where the sequence is the point</h3>
+      <ol>
+        <li>Browser opens a TCP connection</li>
+        <li>Request line and headers go out</li>
+        <li>Server routes the path to a handler</li>
+        <li>Handler talks to the database</li>
+        <li>Response is written back down the same connection</li>
+      </ol>
+
+      <p>Continuing the same list after a break, using <code>start</code>:</p>
+      <ol start="6">
+        <li>Connection is reused or closed</li>
+        <li>Browser paints whatever it got</li>
+      </ol>
+
+      <h3>Description &mdash; term and meaning</h3>
+      <dl>
+        <dt>Middleware</dt>
+        <dd>A function that sits between the request and the handler and can end the request early.</dd>
+        <dt>ORM</dt>
+        <dd>A layer that maps rows to objects so you stop writing the same SELECT forty times.</dd>
+        <dt>Idempotent</dt>
+        <dd>Running it twice leaves the same state as running it once. <code>PUT</code> should be; <code>POST</code> usually is not.</dd>
+      </dl>
+
+      <h3>Menu &mdash; a list of commands</h3>
+      <menu>
+        <li><button type="button" data-log="Server started on :3000">Start server</button></li>
+        <li><button type="button" data-log="Migrations applied (3 pending → 0)">Run migrations</button></li>
+        <li><button type="button" data-log="Cache flushed">Flush cache</button></li>
+      </menu>
+      <p class="console-out" role="status" aria-live="polite">Console output appears here.</p>
+    </section>
+
+    <!-- ========== 04 ========== -->
+    <section id="table">
+      <p class="marker">§ 04</p>
+      <h2>A table, used for actual tabular data</h2>
+
+      <div class="scroll-x">
+        <table>
+          <caption>Table 1 &mdash; What I found while picking a stack for the mini project</caption>
+          <colgroup>
+            <col class="col-name">
+            <col span="2">
+            <col class="col-verdict">
+          </colgroup>
+          <thead>
+            <tr>
+              <th scope="col">Stack</th>
+              <th scope="col">Language</th>
+              <th scope="col">Ramp-up</th>
+              <th scope="col">Where it fits</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Express</th>
+              <td>JavaScript</td>
+              <td>Short</td>
+              <td>REST APIs, anything realtime</td>
+            </tr>
+            <tr>
+              <th scope="row">Django</th>
+              <td>Python</td>
+              <td>Medium</td>
+              <td>Admin-heavy apps, batteries included</td>
+            </tr>
+            <tr>
+              <th scope="row">Flask</th>
+              <td>Python</td>
+              <td>Short</td>
+              <td>Small services, one job each</td>
+            </tr>
+            <tr>
+              <th scope="row">Spring Boot</th>
+              <td>Java</td>
+              <td>Long</td>
+              <td>Large teams that like types and ceremony</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4">Picked Express, mostly because I already knew the language.</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- ========== 05 ========== -->
+    <section id="media">
+      <p class="marker">§ 05</p>
+      <h2>Media, all of it served from the assets folder</h2>
+
+      <article>
+        <h3>A responsive image</h3>
+        <p>
+          <code>&lt;picture&gt;</code> hands the browser a set of candidates and lets it choose.
+          Narrow the window past 700&nbsp;px and the second file loads instead.
+        </p>
+        <picture>
+          <source media="(min-width: 700px)" srcset="assets/stack-wide.svg" type="image/svg+xml">
+          <img src="assets/stack-narrow.svg" alt="The four layers of a backend stack, drawn as stacked bars: browser, HTTP server, application, database." width="400" height="260">
+        </picture>
+      </article>
+
+      <article>
+        <h3>A figure with its caption attached</h3>
+        <figure>
+          <img src="assets/request-cycle.svg" alt="Client sends a POST to the server, the server queries the database, and the result travels back as a 201 Created response." width="720" height="240">
+          <figcaption>Figure 1 &mdash; one request cycle, which is the whole job in four boxes.</figcaption>
+        </figure>
+      </article>
+
+      <article>
+        <h3>Vector drawn inline</h3>
+        <p>
+          Inline <code>&lt;svg&gt;</code> is markup, so CSS and JavaScript can reach into it.
+          This one is a plain uptime bar.
+        </p>
+        <svg class="uptime" viewBox="0 0 600 44" width="600" height="44" role="img" aria-label="Uptime for the last thirty days: three short outages.">
+          <rect x="0" y="14" width="600" height="16" fill="#e6e0d4"></rect>
+          <rect x="0" y="14" width="212" height="16" fill="#3d6b4a"></rect>
+          <rect x="212" y="14" width="9" height="16" fill="#9c4221"></rect>
+          <rect x="221" y="14" width="168" height="16" fill="#3d6b4a"></rect>
+          <rect x="389" y="14" width="5" height="16" fill="#9c4221"></rect>
+          <rect x="394" y="14" width="190" height="16" fill="#3d6b4a"></rect>
+          <rect x="584" y="14" width="16" height="16" fill="#9c4221"></rect>
+          <text x="0" y="10" font-size="11" fill="#736f66" font-family="Consolas, monospace">30 days ago</text>
+          <text x="600" y="10" font-size="11" fill="#736f66" font-family="Consolas, monospace" text-anchor="end">today</text>
+        </svg>
+      </article>
+
+      <article>
+        <h3>Canvas, painted with JavaScript</h3>
+        <p>
+          <code>&lt;canvas&gt;</code> is pixels rather than markup &mdash; nothing exists in the DOM,
+          the drawing happens in <a href="js/main.js">js/main.js</a>.
+        </p>
+        <canvas id="latency" width="600" height="180">
+          Response times over one week: 180, 142, 210, 96, 130, 88 and 104 milliseconds.
+        </canvas>
+      </article>
+
+      <article>
+        <h3>Audio</h3>
+        <p>Three tones generated locally, offered in two formats so the browser can pick one.</p>
+        <audio controls preload="metadata">
+          <source src="assets/tone.mp3" type="audio/mpeg">
+          <source src="assets/tone.ogg" type="audio/ogg">
+          Your browser will not play this file. <a href="assets/tone.mp3">Download it instead.</a>
+        </audio>
+      </article>
+
+      <article>
+        <h3>Video, with captions</h3>
+        <video controls width="600" preload="metadata">
+          <source src="assets/demo.mp4" type="video/mp4">
+          <source src="assets/demo.webm" type="video/webm">
+          <track kind="captions" src="assets/captions.vtt" srclang="en" label="English" default>
+          Your browser will not play this file. <a href="assets/demo.mp4">Download it instead.</a>
+        </video>
+        <p><small>Turn captions on in the player controls to see the <code>&lt;track&gt;</code> file being read.</small></p>
+      </article>
+
+      <article>
+        <h3>An image map</h3>
+        <p>Same picture, three clickable regions. Coordinates are in the image's own pixels, so this one is not resized.</p>
+        <div class="scroll-x">
+          <img src="assets/ports.svg" alt="Three service boxes: API on port 3000, PostgreSQL on 5432, Redis on 6379." width="600" height="150" usemap="#ports">
+          <map name="ports">
+            <area shape="rect" coords="20,42,190,108" href="#table" alt="API service — jump to the stack table">
+            <area shape="rect" coords="215,42,385,108" href="#lists" alt="PostgreSQL — jump to the database list">
+            <area shape="rect" coords="410,42,580,108" href="#lists" alt="Redis — jump to the database list">
+          </map>
+        </div>
+      </article>
+
+      <article>
+        <h3>Other documents pulled in</h3>
+        <p>An <code>&lt;iframe&gt;</code> loading a second page from this project:</p>
+        <iframe src="assets/status-codes.html" title="HTTP status codes cheat sheet" height="220" loading="lazy"></iframe>
+
+        <p>
+          <code>&lt;object&gt;</code> does the same job with a fallback that shows when the
+          resource fails &mdash; here it is the same cheat sheet the iframe loaded:
+        </p>
+        <object data="assets/status-codes.html" type="text/html" width="600" height="200">
+          The cheat sheet could not be loaded. <a href="assets/status-codes.html">Open it directly.</a>
+        </object>
+
+        <p><code>&lt;embed&gt;</code> is the older, blunter version of the same idea &mdash; no fallback content:</p>
+        <embed src="assets/request-cycle.svg" type="image/svg+xml" width="600" height="200">
+      </article>
+    </section>
+
+    <!-- ========== 06 ========== -->
+    <section id="form">
+      <p class="marker">§ 06</p>
+      <h2>The form &mdash; where HTML meets the backend</h2>
+
+      <p>
+        This is the part that matters for this course. Every field below arrives at the server as
+        a key in <code>req.body</code>, named by its <code>name</code> attribute. Nothing is sent
+        anywhere here; the submit handler intercepts it and prints what a server would have received.
+      </p>
+
+      <form id="signup" action="/api/register" method="post" novalidate>
+        <input type="hidden" name="experiment" value="exp-01">
+
+        <fieldset>
+          <legend>Who you are</legend>
+
+          <p class="field">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" placeholder="Suryansh" autocomplete="name" required>
+          </p>
+
+          <p class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@upes.ac.in" autocomplete="email" required>
+          </p>
+
+          <p class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" minlength="8" autocomplete="new-password">
+            <small class="hint">Hashed before it touches the database. Eight characters minimum.</small>
+          </p>
+
+          <p class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" pattern="[+0-9 \-]{8,}">
+          </p>
+
+          <p class="field">
+            <label for="site">Portfolio</label>
+            <input type="url" id="site" name="site" placeholder="https://">
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Dates and numbers</legend>
+
+          <p class="field">
+            <label for="dob">Date of birth</label>
+            <input type="date" id="dob" name="dob">
+          </p>
+
+          <p class="field">
+            <label for="joined">Joined in</label>
+            <input type="month" id="joined" name="joined" value="2024-08">
+          </p>
+
+          <p class="field">
+            <label for="labweek">Lab week</label>
+            <input type="week" id="labweek" name="labweek">
+          </p>
+
+          <p class="field">
+            <label for="slot">Preferred slot</label>
+            <input type="time" id="slot" name="slot" value="14:00" step="1800">
+          </p>
+
+          <p class="field">
+            <label for="deadline">Submission at</label>
+            <input type="datetime-local" id="deadline" name="deadline" value="2026-08-04T23:59">
+          </p>
+
+          <p class="field">
+            <label for="semester">Semester</label>
+            <input type="number" id="semester" name="semester" min="1" max="8" value="5">
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Choices</legend>
+
+          <p class="field">
+            <label for="stack">Stack for the project</label>
+            <select id="stack" name="stack">
+              <optgroup label="JavaScript">
+                <option value="express" selected>Express</option>
+                <option value="fastify">Fastify</option>
+                <option value="nest">NestJS</option>
+              </optgroup>
+              <optgroup label="Python">
+                <option value="django">Django</option>
+                <option value="flask">Flask</option>
+              </optgroup>
+              <optgroup label="Other">
+                <option value="spring">Spring Boot</option>
+              </optgroup>
+            </select>
+          </p>
+
+          <fieldset class="inline-group">
+            <legend>Comfort level</legend>
+            <p><input type="radio" id="lvl-new" name="level" value="new"> <label for="lvl-new">Just started</label></p>
+            <p><input type="radio" id="lvl-mid" name="level" value="mid" checked> <label for="lvl-mid">Built a few things</label></p>
+            <p><input type="radio" id="lvl-adv" name="level" value="adv"> <label for="lvl-adv">Shipped to production</label></p>
+          </fieldset>
+
+          <fieldset class="inline-group">
+            <legend>Topics worth extra sessions</legend>
+            <p><input type="checkbox" id="t-auth" name="topics" value="auth" checked> <label for="t-auth">Auth &amp; sessions</label></p>
+            <p><input type="checkbox" id="t-db" name="topics" value="db"> <label for="t-db">Schema design</label></p>
+            <p><input type="checkbox" id="t-test" name="topics" value="test"> <label for="t-test">Testing</label></p>
+            <p><input type="checkbox" id="t-deploy" name="topics" value="deploy" checked> <label for="t-deploy">Deployment</label></p>
+          </fieldset>
+
+          <p class="field">
+            <label for="search">Search technologies</label>
+            <input type="search" id="search" name="q" list="tech" placeholder="start typing…">
+            <datalist id="tech">
+              <option value="Express"></option>
+              <option value="Django"></option>
+              <option value="Flask"></option>
+              <option value="PostgreSQL"></option>
+              <option value="MongoDB"></option>
+              <option value="Redis"></option>
+              <option value="Docker"></option>
+              <option value="Nginx"></option>
+            </datalist>
+            <small class="hint">The suggestions come from a <code>&lt;datalist&gt;</code>, not from JavaScript.</small>
+          </p>
+
+          <p class="field">
+            <label for="hours">Hours per week</label>
+            <input type="range" id="hours" name="hours" min="0" max="20" step="1" value="6">
+            <output for="hours" id="hoursOut">6</output>
+          </p>
+
+          <p class="field">
+            <label for="accent">Pick a colour</label>
+            <input type="color" id="accent" name="accent" value="#9c4221">
+            <small class="hint">This one actually repaints the page.</small>
+          </p>
+
+          <p class="field">
+            <label for="resume">Attach report</label>
+            <input type="file" id="resume" name="resume" accept=".pdf,.md,.html">
+          </p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Anything else</legend>
+          <p class="field">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" rows="4" placeholder="What you want out of this course."></textarea>
+          </p>
+        </fieldset>
+
+        <p class="gauges">
+          <span>Syllabus covered <progress id="progress" value="18" max="100">18%</progress> <span class="gauge-val">18%</span></span>
+          <span>Disk used by node_modules <meter value="7.4" min="0" max="10" high="8" optimum="3">7.4 GB of 10</meter> <span class="gauge-val">7.4 GB</span></span>
+        </p>
+
+        <p class="actions">
+          <button type="submit">Submit</button>
+          <button type="reset">Reset</button>
+        </p>
+      </form>
+
+      <pre id="payload" class="payload" hidden></pre>
+    </section>
+
+    <!-- ========== 07 ========== -->
+    <section id="interactive">
+      <p class="marker">§ 07</p>
+      <h2>Elements that do something on their own</h2>
+
+      <details>
+        <summary>What I had to install before any of this ran</summary>
+        <ul>
+          <li>Node 20 and npm</li>
+          <li>PostgreSQL 16, running as a service</li>
+          <li>VS Code with the Live Server extension</li>
+        </ul>
+      </details>
+
+      <details open>
+        <summary>What went wrong the first time</summary>
+        <ol>
+          <li>Forgot <code>body-parser</code>, so <code>req.body</code> was undefined for an hour.</li>
+          <li>Opened the page as <code>file://</code> and wondered why fetch was blocked.</li>
+          <li>Committed <code>.env</code>. Rotated the key, moved on, added a gitignore.</li>
+        </ol>
+      </details>
+
+      <p>
+        A <code>&lt;dialog&gt;</code> gives a real modal &mdash; focus trapping, <kbd>Esc</kbd> to close
+        and a backdrop &mdash; without a library:
+      </p>
+      <p><button type="button" id="openDialog">Open the modal</button></p>
+
+      <dialog id="dialog">
+        <h3>Native modal</h3>
+        <p>
+          Opened with <code>showModal()</code>. The page behind it is inert, <kbd>Esc</kbd> closes it,
+          and the backdrop is styled through <code>::backdrop</code>.
+        </p>
+        <form method="dialog">
+          <button value="ok">Close</button>
+        </form>
+      </dialog>
+
+      <p>
+        A <code>&lt;template&gt;</code> holds markup the browser parses but never renders, which
+        JavaScript can then stamp out per record &mdash; the client-side version of what a server
+        template engine does:
+      </p>
+
+      <template id="row-template">
+        <li class="record">
+          <span class="record-method"></span>
+          <span class="record-path"></span>
+          <span class="record-ms"></span>
+        </li>
+      </template>
+
+      <ul id="records" class="records"></ul>
+
+      <noscript>
+        <p class="note-inline">
+          JavaScript is off, so the canvas, the modal and the rendered rows above stay empty.
+          Everything else on this page still works, which is roughly the point of doing the
+          structure in HTML first.
+        </p>
+      </noscript>
+    </section>
+
+    <!-- ========== 08 ========== -->
+    <section id="checklist">
+      <p class="marker">§ 08</p>
+      <h2>Element checklist</h2>
+
+      <p>
+        Grouped the way the lab sheet groups them, so it is easy to tick off against the manual.
+      </p>
+
+      <details>
+        <summary>Everything used on this page (110 elements)</summary>
+
+        <h3>Document and metadata</h3>
+        <p class="tags"><code>html</code> <code>head</code> <code>body</code> <code>title</code> <code>meta</code> <code>link</code> <code>style</code> <code>base</code> <code>script</code> <code>noscript</code> <code>template</code></p>
+
+        <h3>Sectioning</h3>
+        <p class="tags"><code>header</code> <code>hgroup</code> <code>nav</code> <code>main</code> <code>section</code> <code>article</code> <code>aside</code> <code>footer</code> <code>h1</code> <code>h2</code> <code>h3</code> <code>h4</code> <code>h5</code> <code>h6</code> <code>address</code></p>
+
+        <h3>Grouping</h3>
+        <p class="tags"><code>p</code> <code>hr</code> <code>pre</code> <code>blockquote</code> <code>ul</code> <code>ol</code> <code>li</code> <code>menu</code> <code>dl</code> <code>dt</code> <code>dd</code> <code>figure</code> <code>figcaption</code> <code>div</code></p>
+
+        <h3>Text level</h3>
+        <p class="tags"><code>a</code> <code>em</code> <code>strong</code> <code>small</code> <code>s</code> <code>cite</code> <code>q</code> <code>dfn</code> <code>abbr</code> <code>ruby</code> <code>rt</code> <code>rp</code> <code>data</code> <code>time</code> <code>code</code> <code>var</code> <code>samp</code> <code>kbd</code> <code>sub</code> <code>sup</code> <code>i</code> <code>b</code> <code>u</code> <code>mark</code> <code>bdi</code> <code>bdo</code> <code>span</code> <code>br</code> <code>wbr</code> <code>ins</code> <code>del</code></p>
+
+        <h3>Embedded content</h3>
+        <p class="tags"><code>picture</code> <code>source</code> <code>img</code> <code>iframe</code> <code>embed</code> <code>object</code> <code>video</code> <code>audio</code> <code>track</code> <code>map</code> <code>area</code> <code>canvas</code> <code>svg</code></p>
+
+        <h3>Tables</h3>
+        <p class="tags"><code>table</code> <code>caption</code> <code>colgroup</code> <code>col</code> <code>thead</code> <code>tbody</code> <code>tfoot</code> <code>tr</code> <code>th</code> <code>td</code></p>
+
+        <h3>Forms</h3>
+        <p class="tags"><code>form</code> <code>label</code> <code>input</code> <code>button</code> <code>select</code> <code>datalist</code> <code>optgroup</code> <code>option</code> <code>textarea</code> <code>output</code> <code>progress</code> <code>meter</code> <code>fieldset</code> <code>legend</code></p>
+        <p>
+          Input types covered: <code>text</code>, <code>email</code>, <code>password</code>,
+          <code>tel</code>, <code>url</code>, <code>search</code>, <code>number</code>,
+          <code>range</code>, <code>date</code>, <code>month</code>, <code>week</code>,
+          <code>time</code>, <code>datetime-local</code>, <code>color</code>, <code>file</code>,
+          <code>checkbox</code>, <code>radio</code>, <code>hidden</code>.
+        </p>
+
+        <h3>Interactive</h3>
+        <p class="tags"><code>details</code> <code>summary</code> <code>dialog</code></p>
+
+        <h3>Left out on purpose</h3>
+        <p>
+          <code>font</code>, <code>center</code>, <code>big</code>, <code>strike</code>,
+          <code>tt</code>, <code>acronym</code>, <code>dir</code>, <code>applet</code>,
+          <code>frame</code>, <code>frameset</code>, <code>noframes</code>, <code>basefont</code>,
+          <code>menuitem</code> and <code>param</code> are all listed in the manual's alphabetical
+          table but are deprecated or removed in HTML5. Using them would fail validation, so they
+          are documented here rather than demonstrated.
+        </p>
+      </details>
+
+      <h4>How to check this yourself</h4>
+      <p>Open DevTools and paste this into the console, or run the file through the W3C validator:</p>
+      <pre><code>new Set(
+  [...document.querySelectorAll('*')]
+    .filter(n =&gt; n.namespaceURI === 'http://www.w3.org/1999/xhtml')
+    .map(n =&gt; n.tagName.toLowerCase())
+).size
+// 110 — the filter drops the shapes inside the inline &lt;svg&gt;</code></pre>
+      <h5>Validation status</h5>
+      <p>No errors, no warnings on the last run.</p>
+      <h6>One last heading, present only so all six levels appear</h6>
+    </section>
+
+  </main>
+
+  <footer class="page-foot">
+    <nav aria-label="Related files">
+      <ul>
+        <li><a href="css/style.css">style.css</a></li>
+        <li><a href="js/main.js">main.js</a></li>
+        <li><a href="README.md">README</a></li>
+        <li><a href="https://html.spec.whatwg.org/multipage/" target="_blank" rel="noopener noreferrer">HTML spec</a></li>
+      </ul>
+    </nav>
+    <p>
+      <small>
+        Experiment 1 &middot; Backend Development (CSFS3008P) &middot; Suryansh &middot;
+        last edited <time datetime="2026-08-04">4 August 2026</time>.
+        Hand-written HTML, no generator.
+      </small>
+    </p>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

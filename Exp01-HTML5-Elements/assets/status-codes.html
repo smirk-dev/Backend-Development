@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Status codes cheat sheet</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 18px 20px;
+      background: #fbf9f4;
+      color: #1c1b19;
+      font: 14px/1.55 "Consolas", "SF Mono", monospace;
+    }
+    h1 { font: italic 15px/1.4 Georgia, serif; margin: 0 0 12px; color: #736f66; }
+    dl { margin: 0; display: grid; grid-template-columns: 58px 1fr; row-gap: 6px; }
+    dt { color: #9c4221; }
+    dd { margin: 0; }
+  </style>
+</head>
+<body>
+  <h1>Codes I keep forgetting</h1>
+  <dl>
+    <dt>201</dt><dd>Created — the row actually landed in the table.</dd>
+    <dt>204</dt><dd>No content — it worked, there is just nothing to send back.</dd>
+    <dt>302</dt><dd>Found — temporary redirect, browser will come back here later.</dd>
+    <dt>409</dt><dd>Conflict — usually a duplicate email in my case.</dd>
+    <dt>422</dt><dd>Unprocessable — the body parsed, the validation did not.</dd>
+    <dt>502</dt><dd>Bad gateway — my server died, nginx is being polite about it.</dd>
+  </dl>
+</body>
+</html>

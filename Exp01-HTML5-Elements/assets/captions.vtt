@@ -1,0 +1,16 @@
+WEBVTT
+
+NOTE
+Captions for demo.mp4 — added to demonstrate the <track> element.
+
+1
+00:00:00.000 --> 00:00:03.500
+This clip is served from the assets folder, not from a CDN.
+
+2
+00:00:03.500 --> 00:00:07.000
+The video element falls back to WebM if MP4 is unsupported.
+
+3
+00:00:07.000 --> 00:00:10.000
+These captions come from a .vtt file linked with the track element.
