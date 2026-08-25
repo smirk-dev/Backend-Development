@@ -1,0 +1,220 @@
+/* Two palettes, picked by the data-theme attribute the server writes from the
+   `theme` cookie. No client-side JavaScript is involved anywhere on this page. */
+
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --text: #1d2129;
+  --muted: #66707d;
+  --border: #dfe3e8;
+  --accent: #2f6feb;
+  --accent-text: #ffffff;
+  --danger: #c0392b;
+  --error-bg: #fdecea;
+  --notice-bg: #e7f4ea;
+  --code-bg: #eef0f3;
+}
+
+[data-theme="dark"] {
+  --bg: #14171c;
+  --surface: #1d222a;
+  --text: #e6e9ee;
+  --muted: #98a2b3;
+  --border: #2c333d;
+  --accent: #5b8dff;
+  --accent-text: #0f1216;
+  --danger: #ff7a6b;
+  --error-bg: #3a1f1c;
+  --notice-bg: #1c3324;
+  --code-bg: #262c35;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+}
+
+/* ----- chrome ------------------------------------------------------------ */
+
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.topbar nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.topbar nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.topbar nav a:hover { color: var(--accent); }
+
+main {
+  max-width: 720px;
+  margin: 32px auto;
+  padding: 0 20px;
+}
+
+.footer {
+  max-width: 720px;
+  margin: 40px auto 32px;
+  padding: 0 20px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ----- content ----------------------------------------------------------- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+}
+
+.lede { margin-top: 0; color: var(--muted); }
+.muted { color: var(--muted); font-size: 0.9rem; }
+.muted a, .lede a { color: var(--accent); }
+
+code {
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.87em;
+}
+
+.flash {
+  margin: 0 0 18px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.flash.error { background: var(--error-bg); }
+.flash.notice { background: var(--notice-bg); }
+
+.facts {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 20px;
+  margin: 20px 0 24px;
+}
+
+.facts dt { color: var(--muted); font-size: 0.9rem; }
+.facts dd { margin: 0; overflow-wrap: anywhere; }
+
+/* ----- forms ------------------------------------------------------------- */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 22px 0 18px;
+}
+
+.stack label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  margin: 22px 0 18px;
+}
+
+.row input { flex: 1; }
+
+.inline { display: inline; margin: 0; }
+
+input[type="text"],
+input[type="password"] {
+  padding: 9px 12px;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+}
+
+input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+button {
+  padding: 9px 16px;
+  font: inherit;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: var(--accent);
+  color: var(--accent-text);
+  cursor: pointer;
+}
+
+button:hover { filter: brightness(1.08); }
+
+button.ghost {
+  background: none;
+  border-color: var(--border);
+  color: var(--muted);
+  padding: 5px 10px;
+  font-size: 0.85rem;
+}
+
+button.ghost:hover { color: var(--accent); border-color: var(--accent); }
+
+button.danger { background: var(--danger); color: #fff; }
+button.danger-text { color: var(--danger); }
+
+/* ----- to-do list -------------------------------------------------------- */
+
+.todos {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.todos li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.todos li:last-child { border-bottom: none; }
+.todos li span { overflow-wrap: anywhere; }

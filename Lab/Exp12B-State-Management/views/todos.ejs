@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+<section class="card">
+  <h1>To-Do List</h1>
+  <p class="lede">
+    Stored in <code>req.session.todos</code>, so this list belongs to this browser
+    session alone. Open the page in a private window to get an empty one, and it
+    disappears when the session expires.
+  </p>
+
+  <form action="/todos" method="post" class="row">
+    <input type="text" name="todoItem" placeholder="Add a to-do item" required autofocus>
+    <button type="submit">Add</button>
+  </form>
+
+  <% if (todos.length === 0) { %>
+    <p class="muted">Nothing here yet — add the first item above.</p>
+  <% } else { %>
+    <ul class="todos">
+      <% todos.forEach(function (item, index) { %>
+        <li>
+          <span><%= item %></span>
+          <form action="/todos/<%= index %>/delete" method="post" class="inline">
+            <button type="submit" class="ghost danger-text">Delete</button>
+          </form>
+        </li>
+      <% }); %>
+    </ul>
+
+    <form action="/todos/clear" method="post">
+      <button type="submit" class="ghost">Clear the list</button>
+    </form>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

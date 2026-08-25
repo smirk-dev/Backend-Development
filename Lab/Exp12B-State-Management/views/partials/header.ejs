@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= theme %>">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> · Experiment 12 B</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">Experiment 12 B · Sessions &amp; Cookies</a>
+
+    <nav>
+      <% if (user) { %>
+        <a href="/dashboard">Dashboard</a>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      <% } %>
+      <a href="/todos">To-Do</a>
+
+      <form class="inline" action="/theme" method="post">
+        <input type="hidden" name="from" value="<%= currentPath %>">
+        <button type="submit" class="ghost" title="Stored in the `theme` cookie">
+          <%= theme === 'dark' ? 'Light mode' : 'Dark mode' %>
+        </button>
+      </form>
+
+      <% if (user) { %>
+        <form class="inline" action="/logout" method="post">
+          <button type="submit" class="ghost">Logout</button>
+        </form>
+      <% } %>
+    </nav>
+  </header>
+
+  <main>
+    <% if (error) { %>
+      <p class="flash error"><%= error %></p>
+    <% } %>
+    <% if (notice) { %>
+      <p class="flash notice"><%= notice %></p>
+    <% } %>

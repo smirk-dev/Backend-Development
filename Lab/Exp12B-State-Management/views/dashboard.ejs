@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+
+<section class="card">
+  <h1>Welcome back, <%= user.username %>.</h1>
+  <p class="lede">
+    This page is behind <code>authMiddleware</code>. Log out, or open it in a private
+    window, and it bounces straight to the login form.
+  </p>
+
+  <dl class="facts">
+    <dt>Session ID</dt>
+    <dd><code><%= sessionId %></code></dd>
+
+    <dt>Logged in at</dt>
+    <dd><%= new Date(user.loginAt).toLocaleString() %></dd>
+
+    <dt>Items in this session's to-do list</dt>
+    <dd><%= todoCount %> — <a href="/todos">open the list</a></dd>
+
+    <dt>Theme cookie</dt>
+    <dd><code>theme=<%= theme %></code> (survives logout, because it lives in the browser)</dd>
+  </dl>
+
+  <form action="/logout" method="post">
+    <button type="submit" class="danger">Log out</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

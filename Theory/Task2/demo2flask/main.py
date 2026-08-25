@@ -4,9 +4,12 @@ app = Flask(__name__)
 
 students = [
     {"id": 1, "name": "Aarav", "branch": "CSE"},
-    {"id": 2, "name": "Diya", "branch": "ECE"},
+    {"id": 2, "name": "Diya", "branch": "ECE"}, 
     {"id": 3, "name": "Rohan", "branch": "IT"}
+    
+    
 ]
+
 
 @app.route("/")
 def home():

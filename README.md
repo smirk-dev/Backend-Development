@@ -12,6 +12,8 @@ open its folder, serve it, and it runs with no install step and no network.
 |---|------------|--------|--------|
 | 01 | Create a web page with all possible elements of HTML5 | [`Exp01-HTML5-Elements/`](Exp01-HTML5-Elements/) | Done |
 | 02 | Create a web page with all types of Cascading Style Sheets | — | Not started |
+| 12 | Node.js, Express and EJS Templating (manual's Experiment 12, Parts A-C) | [`Exp12-NodeJS-Express-EJS/`](Exp12-NodeJS-Express-EJS/) | Done |
+| 12B | State Management — sessions and cookies (optional; both lab assignments) | [`Exp12B-State-Management/`](Exp12B-State-Management/) | Done |
 
 ## Running any of them
 

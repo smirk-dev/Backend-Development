@@ -1,0 +1,17 @@
+{
+  "name": "exp12-nodejs-express-ejs",
+  "version": "1.0.0",
+  "description": "Experiment 12, Parts A-C: Node.js/Express basics, params & POST data, EJS templating",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "keywords": ["nodejs", "express", "ejs"],
+  "author": "Suryansh",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  }
+}
