@@ -1,0 +1,70 @@
+<%- include('partials/header') %>
+
+<div class="page-head">
+    <div>
+        <h1><%= mode === 'edit' ? 'Edit note' : 'Add a note' %></h1>
+        <p class="lede">
+            <% if (mode === 'edit') { %>
+                Change the fields and save. The note keeps its original creation date.
+            <% } else { %>
+                Title and content are required. The creation date is set by the server.
+            <% } %>
+        </p>
+    </div>
+    <a class="button button-quiet" href="/notes">Back to notes</a>
+</div>
+
+<% if (Object.keys(errors).length > 0) { %>
+    <div class="alert" role="alert">
+        <strong>The note was not saved.</strong>
+        <ul>
+            <% Object.keys(errors).forEach(function (key) { %>
+                <li><%= errors[key] %></li>
+            <% }); %>
+        </ul>
+    </div>
+<% } %>
+
+<form class="note-form" method="POST" action="<%= action %>" novalidate>
+    <div class="field">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" maxlength="120"
+               value="<%= values.title %>"
+               class="<%= errors.title ? 'has-error' : '' %>"
+               placeholder="What is this note about?">
+        <% if (errors.title) { %><p class="field-error"><%= errors.title %></p><% } %>
+    </div>
+
+    <div class="field">
+        <label for="content">Content</label>
+        <textarea id="content" name="content" rows="8" maxlength="2000"
+                  class="<%= errors.content ? 'has-error' : '' %>"
+                  placeholder="Write the note here."><%= values.content %></textarea>
+        <% if (errors.content) { %><p class="field-error"><%= errors.content %></p><% } %>
+    </div>
+
+    <div class="field">
+        <label for="category">Category</label>
+        <!-- A datalist, not a select: the suggested categories are offered, but a
+             new one can still be typed in. -->
+        <input type="text" id="category" name="category" list="category-options"
+               maxlength="40" value="<%= values.category %>"
+               class="<%= errors.category ? 'has-error' : '' %>">
+        <datalist id="category-options">
+            <% categories.forEach(function (c) { %>
+                <option value="<%= c %>"></option>
+            <% }); %>
+        </datalist>
+        <% if (errors.category) { %><p class="field-error"><%= errors.category %></p><% } %>
+        <p class="hint">Leave blank to use &ldquo;General&rdquo;.</p>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="button button-primary">
+            <%= mode === 'edit' ? 'Save changes' : 'Save note' %>
+        </button>
+        <a class="button button-quiet" href="/notes">Cancel</a>
+    </div>
+</form>
+
+<%- include('partials/footer') %>

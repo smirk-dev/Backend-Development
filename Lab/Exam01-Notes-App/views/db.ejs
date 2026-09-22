@@ -1,0 +1,118 @@
+<%- include('partials/header') %>
+
+<div class="page-head">
+    <div>
+        <h1>Database inspector</h1>
+        <p class="lede">
+            A live read of the MongoDB server this application is connected to —
+            the same server MongoDB Compass and <code>mongosh</code> see.
+        </p>
+    </div>
+    <a class="button button-quiet" href="/notes">Back to notes</a>
+</div>
+
+<section class="panel">
+    <h2>Connection</h2>
+    <dl class="kv">
+        <dt>Connection URL</dt><dd><code><%= mongoUrl %></code></dd>
+        <dt>Database</dt><dd><code><%= dbName %></code></dd>
+        <dt>Collection</dt><dd><code><%= collectionName %></code></dd>
+        <dt>Documents</dt><dd><%= documents.length %></dd>
+        <dt>MongoDB server</dt><dd>v<%= serverVersion %></dd>
+        <dt>Runtime</dt>
+        <dd>
+            Node <%= nodeVersion %> · express <%= expressVersion %> ·
+            ejs <%= ejsVersion %> · mongodb driver <%= driverVersion %>
+        </dd>
+    </dl>
+</section>
+
+<section class="panel">
+    <h2>Databases on this server</h2>
+    <table class="table">
+        <thead>
+            <tr><th>Name</th><th class="num">Size on disk</th></tr>
+        </thead>
+        <tbody>
+            <% if (databases.length === 0) { %>
+                <tr><td colspan="2">Server did not report a database list.</td></tr>
+            <% } %>
+            <% databases.forEach(function (d) { %>
+                <tr class="<%= d.name === dbName ? 'is-current-row' : '' %>">
+                    <td><code><%= d.name %></code><%= d.name === dbName ? ' — this app' : '' %></td>
+                    <td class="num"><%= d.sizeOnDisk ? (d.sizeOnDisk / 1024).toFixed(1) + ' KB' : '—' %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</section>
+
+<section class="panel">
+    <h2>Collections in <code><%= dbName %></code></h2>
+    <ul class="pill-list">
+        <% collections.forEach(function (c) { %>
+            <li class="pill"><%= c.name %></li>
+        <% }); %>
+        <% if (collections.length === 0) { %>
+            <li class="pill">none yet</li>
+        <% } %>
+    </ul>
+</section>
+
+<section class="panel">
+    <h2>Indexes on <code><%= collectionName %></code></h2>
+    <table class="table">
+        <thead>
+            <tr><th>Name</th><th>Key</th></tr>
+        </thead>
+        <tbody>
+            <% indexes.forEach(function (idx) { %>
+                <tr>
+                    <td><code><%= idx.name %></code></td>
+                    <td><code><%= JSON.stringify(idx.key) %></code></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <% if (stats) { %>
+        <p class="hint">
+            Storage size <%= (stats.storageSize / 1024).toFixed(1) %> KB ·
+            average document <%= stats.avgObjSize ? Math.round(stats.avgObjSize) + ' bytes' : '—' %>
+        </p>
+    <% } %>
+</section>
+
+<section class="panel">
+    <h2>Raw documents</h2>
+    <p class="hint">
+        Exactly what <code>db.<%= collectionName %>.find()</code> returns, newest first.
+        The same data is available as JSON at <a href="/api/notes">/api/notes</a>.
+    </p>
+    <% if (documents.length === 0) { %>
+        <p class="empty">The collection is empty.</p>
+    <% } else { %>
+        <pre class="code"><%= JSON.stringify(documents, null, 2) %></pre>
+    <% } %>
+</section>
+
+<section class="panel">
+    <h2>Routes this server exposes</h2>
+    <table class="table">
+        <thead>
+            <tr><th>Method</th><th>Route</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>GET</code></td><td><code>/</code></td><td>Redirect to <code>/notes</code></td></tr>
+            <tr><td><code>GET</code></td><td><code>/notes</code></td><td>Display all notes (<code>?q=</code> search, <code>?category=</code> filter)</td></tr>
+            <tr><td><code>GET</code></td><td><code>/notes/new</code></td><td>Add-note form</td></tr>
+            <tr><td><code>POST</code></td><td><code>/notes</code></td><td>Validate and insert a note</td></tr>
+            <tr><td><code>GET</code></td><td><code>/notes/:id/edit</code></td><td>Edit form (bonus)</td></tr>
+            <tr><td><code>POST</code></td><td><code>/notes/:id</code></td><td>Update a note (bonus)</td></tr>
+            <tr><td><code>POST</code></td><td><code>/notes/:id/delete</code></td><td>Delete a note</td></tr>
+            <tr><td><code>GET</code></td><td><code>/api/notes</code></td><td>Raw documents as JSON</td></tr>
+            <tr><td><code>GET</code></td><td><code>/db</code></td><td>This page</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<%- include('partials/footer') %>

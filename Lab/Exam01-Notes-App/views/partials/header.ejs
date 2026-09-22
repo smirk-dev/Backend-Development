@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> · My Notes</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    <header class="masthead">
+        <div class="wrap masthead-inner">
+            <a class="brand" href="/notes">
+                <span class="brand-mark">MN</span>
+                <span class="brand-text">
+                    My&nbsp;Notes
+                    <small>Backend Development Lab · Examination 01</small>
+                </span>
+            </a>
+            <nav class="nav">
+                <a href="/notes" class="<%= currentPath === '/notes' ? 'is-current' : '' %>">Notes</a>
+                <a href="/notes/new" class="<%= currentPath === '/notes/new' ? 'is-current' : '' %>">Add note</a>
+                <a href="/db" class="<%= currentPath === '/db' ? 'is-current' : '' %>">Database</a>
+                <a href="/api/notes">JSON</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrap">

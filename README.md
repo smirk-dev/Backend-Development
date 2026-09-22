@@ -14,6 +14,8 @@ open its folder, serve it, and it runs with no install step and no network.
 | 02 | Create a web page with all types of Cascading Style Sheets | — | Not started |
 | 12 | Node.js, Express and EJS Templating (manual's Experiment 12, Parts A-C) | [`Exp12-NodeJS-Express-EJS/`](Exp12-NodeJS-Express-EJS/) | Done |
 | 12B | State Management — sessions and cookies (optional; both lab assignments) | [`Exp12B-State-Management/`](Exp12B-State-Management/) | Done |
+| 13A | MongoDB, Mongoose, and Express user registration and login system | [`Exp13A-MongoDB-Mongoose-UserAuth/`](Exp13A-MongoDB-Mongoose-UserAuth/) | Done |
+| Exam 01 | Lab examination — "My Notes" notes management app (Express + EJS + MongoDB) | [`Exam01-Notes-App/`](Exam01-Notes-App/) | Done |
 
 ## Running any of them
 

@@ -1,0 +1,21 @@
+{
+  "name": "exam01-notes-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "My Notes — Backend Development Lab Examination 01 (Express + EJS + MongoDB)",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js",
+    "seed": "node seed.js",
+    "clear": "node seed.js --clear"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mongodb": "^6.13.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

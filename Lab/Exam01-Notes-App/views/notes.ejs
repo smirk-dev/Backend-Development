@@ -1,0 +1,98 @@
+<%- include('partials/header') %>
+
+<div class="page-head">
+    <div>
+        <h1>All notes</h1>
+        <p class="lede">
+            <% if (filtered) { %>
+                Showing <strong><%= notes.length %></strong>
+                of <strong><%= totalCount %></strong>
+                note<%= totalCount === 1 ? '' : 's' %>
+                <% if (search) { %> matching &ldquo;<%= search %>&rdquo;<% } %>
+                <% if (category) { %> in <%= category %><% } %>.
+            <% } else { %>
+                <strong><%= totalCount %></strong> note<%= totalCount === 1 ? '' : 's' %>
+                stored in MongoDB.
+            <% } %>
+        </p>
+    </div>
+    <a class="button button-primary" href="/notes/new">Add a note</a>
+</div>
+
+<!-- Bonus: search by title and filter by category. Both are plain GET form
+     fields, so the state of the list lives in the URL and can be bookmarked. -->
+<form class="filters" method="GET" action="/notes">
+    <div class="field">
+        <label for="q">Search by title</label>
+        <input type="search" id="q" name="q" value="<%= search %>" placeholder="e.g. backend">
+    </div>
+
+    <div class="field">
+        <label for="category">Category</label>
+        <select id="category" name="category">
+            <option value="">All categories</option>
+            <% allCategories.forEach(function (c) { %>
+                <option value="<%= c %>" <%= c === category ? 'selected' : '' %>><%= c %></option>
+            <% }); %>
+        </select>
+    </div>
+
+    <div class="field field-actions">
+        <button type="submit" class="button">Apply</button>
+        <% if (filtered) { %>
+            <a class="button button-quiet" href="/notes">Clear</a>
+        <% } %>
+    </div>
+</form>
+
+<% if (notes.length === 0) { %>
+    <!-- Requirement: display a suitable message when there are no notes. -->
+    <p class="empty">
+        <% if (filtered) { %>
+            No notes match this search. <a href="/notes">Show all notes</a>.
+        <% } else { %>
+            No notes yet. <a href="/notes/new">Add the first one</a>.
+        <% } %>
+    </p>
+<% } else { %>
+    <ul class="notes">
+        <% notes.forEach(function (note) { %>
+            <li class="note">
+                <div class="note-head">
+                    <h2 class="note-title"><%= note.title %></h2>
+                    <span class="tag"><%= note.category %></span>
+                </div>
+
+                <p class="note-content"><%= note.content %></p>
+
+                <div class="note-foot">
+                    <div class="note-meta">
+                        <time datetime="<%= note.createdAt ? note.createdAt.toISOString() : '' %>">
+                            <%= note.createdAt
+                                ? note.createdAt.toLocaleString('en-IN', {
+                                      dateStyle: 'medium',
+                                      timeStyle: 'short',
+                                  })
+                                : 'Unknown date' %>
+                        </time>
+                        <% if (note.updatedAt) { %>
+                            <span class="edited">· edited</span>
+                        <% } %>
+                        <code class="oid"><%= note._id %></code>
+                    </div>
+
+                    <div class="note-actions">
+                        <a class="button button-quiet" href="/notes/<%= note._id %>/edit">Edit</a>
+                        <!-- Delete is a POST: deleting is not a safe HTTP method. -->
+                        <form method="POST" action="/notes/<%= note._id %>/delete"
+                              onsubmit="return confirm('Delete this note?');">
+                            <button type="submit" class="button button-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </li>
+        <% }); %>
+    </ul>
+<% } %>
+
+<%- include('partials/footer') %>
