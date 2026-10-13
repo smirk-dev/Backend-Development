@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Experiment 07 &amp; 08 — ES6, DOM Manipulation and Event Handling</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <p class="eyebrow">Backend Development · CSFS3008P · Experiment 07 &amp; 08</p>
+  <h1>ES6, DOM Manipulation, and Event Handling</h1>
+  <p class="lede">Every snippet in the manual, running live. Each block has the code behind it in
+    <code>js/</code>; the output panel shows what it actually produced.</p>
+  <nav aria-label="Sections">
+    <a href="#part-a">A · ES6</a>
+    <a href="#part-b">B · DOM</a>
+    <a href="#part-c">C · Events</a>
+    <a href="#todo">6 · To-Do app</a>
+    <a href="#summary">Summary</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============================ PART A ============================ -->
+<section id="part-a">
+  <h2>Part A — ES6 (ECMAScript 2015) features</h2>
+
+  <article>
+    <h3>3.1 <code>let</code> and <code>const</code></h3>
+    <p>Block-scoped declarations. Use <code>const</code> by default, <code>let</code> when reassigning, avoid <code>var</code>.</p>
+    <pre class="out" id="out-letconst"></pre>
+  </article>
+
+  <article>
+    <h3>3.2 Arrow functions</h3>
+    <p>Shorter syntax, and no <code>this</code> of their own.</p>
+    <pre class="out" id="out-arrow"></pre>
+  </article>
+
+  <article>
+    <h3>3.3 Template literals</h3>
+    <pre class="out" id="out-template"></pre>
+  </article>
+
+  <article>
+    <h3>3.4 Destructuring</h3>
+    <pre class="out" id="out-destructuring"></pre>
+  </article>
+
+  <article>
+    <h3>3.5 Spread and rest (<code>...</code>)</h3>
+    <pre class="out" id="out-spread"></pre>
+  </article>
+
+  <article>
+    <h3>3.6 Default parameters</h3>
+    <pre class="out" id="out-default"></pre>
+  </article>
+
+  <article>
+    <h3>3.7 Classes</h3>
+    <pre class="out" id="out-class"></pre>
+  </article>
+
+  <article>
+    <h3>3.8 Modules (<code>import</code> / <code>export</code>)</h3>
+    <p><code>js/math.js</code> exports <code>PI</code>, <code>add</code> and a default <code>multiply</code>;
+      <code>js/es6.js</code> imports them. This page loads it with <code>type="module"</code>, which is why it must be served over HTTP.</p>
+    <pre class="out" id="out-module"></pre>
+  </article>
+
+  <article>
+    <h3>3.9 Promises and async/await</h3>
+    <p><button type="button" id="run-promise">Run fetchData()</button></p>
+    <pre class="out" id="out-promise"></pre>
+  </article>
+
+  <article>
+    <h3>3.10 Enhanced object literals</h3>
+    <pre class="out" id="out-literal"></pre>
+  </article>
+</section>
+
+<!-- ============================ PART B ============================ -->
+<section id="part-b">
+  <h2>Part B — DOM manipulation</h2>
+
+  <article>
+    <h3>4.1 The DOM tree</h3>
+    <pre class="tree">document
+  └── html
+       ├── head
+       │    └── title
+       └── body
+            ├── h1
+            └── p</pre>
+  </article>
+
+  <article>
+    <h3>4.2 Selecting elements</h3>
+    <div id="sel-container" class="well">
+      <p class="sel-text">First paragraph</p>
+      <p class="sel-text">Second paragraph</p>
+    </div>
+    <p><button type="button" id="run-select">Run all five selectors</button></p>
+    <pre class="out" id="out-select">Press the button.</pre>
+  </article>
+
+  <article>
+    <h3>4.3 Modifying content</h3>
+    <h4 id="content-target" class="well">Original Heading</h4>
+    <p class="row">
+      <button type="button" id="btn-textcontent">textContent</button>
+      <button type="button" id="btn-innerhtml">innerHTML</button>
+      <button type="button" id="btn-innertext">innerText</button>
+    </p>
+    <p class="warn"><strong>Security.</strong> Avoid <code>innerHTML</code> with user-supplied data — it can lead to XSS.</p>
+    <p class="row"><button type="button" id="btn-xss">Compare textContent vs innerHTML on a hostile string</button></p>
+    <div class="split">
+      <div><small>textContent</small><div id="xss-safe" class="well mono"></div></div>
+      <div><small>innerHTML</small><div id="xss-unsafe" class="well"></div></div>
+    </div>
+    <pre class="out" id="out-xss">Press the button.</pre>
+  </article>
+
+  <article id="attr">
+    <h3>4.4 Modifying attributes</h3>
+    <p><a id="attr-link" href="#attr">A link whose attributes we change</a></p>
+    <p class="row">
+      <button type="button" id="btn-attr-get">getAttribute</button>
+      <button type="button" id="btn-attr-set">setAttribute</button>
+      <button type="button" id="btn-attr-remove">removeAttribute</button>
+      <button type="button" id="btn-attr-prop">link.href = …</button>
+      <button type="button" id="btn-attr-reset" class="quiet">Reset</button>
+    </p>
+    <pre class="out" id="out-attr">Press a button.</pre>
+  </article>
+
+  <article>
+    <h3>4.5 Modifying styles</h3>
+    <div id="style-box" class="box">Style me</div>
+    <p class="row">
+      <button type="button" id="btn-style-inline">style.* (inline)</button>
+      <button type="button" id="btn-class-add">classList.add("highlight")</button>
+      <button type="button" id="btn-class-remove">classList.remove("highlight")</button>
+      <button type="button" id="btn-class-toggle">classList.toggle("active")</button>
+      <button type="button" id="btn-style-reset" class="quiet">Reset</button>
+    </p>
+    <pre class="out" id="out-style"></pre>
+  </article>
+
+  <article>
+    <h3>4.6 &amp; 4.7 Creating, adding and removing elements</h3>
+    <p class="row">
+      <button type="button" id="btn-append">appendChild</button>
+      <button type="button" id="btn-prepend">prepend</button>
+      <button type="button" id="btn-insert-before">insertBefore</button>
+      <button type="button" id="btn-before">last.before</button>
+      <button type="button" id="btn-after">first.after</button>
+      <button type="button" id="btn-remove-last">element.remove()</button>
+      <button type="button" id="btn-remove-first">parentNode.removeChild</button>
+    </p>
+    <div id="create-container" class="well stack"></div>
+  </article>
+
+  <article>
+    <h3>4.8 Traversing the DOM</h3>
+    <p>Click an item.</p>
+    <ul id="trav-list" class="pick">
+      <li>Apple</li>
+      <li>Banana</li>
+      <li>Cherry</li>
+      <li>Date</li>
+    </ul>
+    <pre class="out" id="out-traverse">Click an item.</pre>
+  </article>
+</section>
+
+<!-- ============================ PART C ============================ -->
+<section id="part-c">
+  <h2>Part C — Event handling</h2>
+
+  <article>
+    <h3>5.2 Three ways to attach a handler</h3>
+    <p class="row">
+      <button type="button" id="attach-attr" onclick="attachAttrClicked()">1 · HTML attribute</button>
+      <button type="button" id="attach-prop">2 · DOM property</button>
+      <button type="button" id="attach-btn">3 · addEventListener</button>
+    </p>
+    <pre class="out" id="out-attach"></pre>
+    <p>Method 2 was assigned twice in <code>js/events.js</code>; the second assignment silently replaced the first. Method 3 stacks.</p>
+  </article>
+
+  <article>
+    <h3>5.3 &amp; 5.4 Event types and the event object</h3>
+    <div id="event-pad" class="pad" tabindex="0">Interact with this pad</div>
+    <pre class="out" id="out-event"></pre>
+  </article>
+
+  <article>
+    <h3>5.5 Keyboard events</h3>
+    <p><input type="text" id="key-field" placeholder="Type here…" aria-label="Keyboard demo"></p>
+    <pre class="out" id="out-key">Type in the box.</pre>
+  </article>
+
+  <article>
+    <h3>5.6 Form events</h3>
+    <form id="myForm">
+      <input type="text" id="username" required placeholder="username" aria-label="Username">
+      <button type="submit">Submit</button>
+      <select id="colour-select" aria-label="Colour">
+        <option>red</option><option>green</option><option>blue</option>
+      </select>
+    </form>
+    <pre class="out" id="out-form">Type, tab away, or submit.</pre>
+  </article>
+
+  <article>
+    <h3>5.7 &amp; 5.8 Bubbling, capturing, <code>stopPropagation()</code>, <code>preventDefault()</code></h3>
+    <div id="outer" class="outer">outer
+      <button type="button" id="inner">Click Me</button>
+    </div>
+    <p class="row">
+      <label><input type="checkbox" id="stop-toggle"> stopPropagation() on inner</label>
+      <label><input type="checkbox" id="capture-toggle"> highlight outer</label>
+      <a id="prevent-link" href="https://example.com">A link with preventDefault()</a>
+    </p>
+    <pre class="out" id="out-bubble">Click the button.</pre>
+  </article>
+
+  <article>
+    <h3>5.9 Event delegation</h3>
+    <p>One listener on the <code>&lt;ul&gt;</code>, however many <code>&lt;li&gt;</code> there are.</p>
+    <ul id="delegate-list" class="pick">
+      <li>Task 1</li>
+      <li>Task 2</li>
+      <li>Task 3</li>
+    </ul>
+    <p><button type="button" id="delegate-add">Add a task</button></p>
+    <pre class="out" id="out-delegate">Click a task.</pre>
+  </article>
+</section>
+
+<!-- ============================ SECTION 6 ============================ -->
+<section id="todo">
+  <h2>6 · Practical exercise — Interactive To-Do list</h2>
+  <p>The manual's <code>index.html</code> and <code>app.js</code>, unchanged, in
+    <a href="todo/index.html"><code>todo/</code></a>. Open it as its own page, or use the copy below.</p>
+  <iframe src="todo/index.html" title="To-Do app" height="360"></iframe>
+  <p><strong>Concepts used:</strong> <code>const</code>/<code>let</code>, arrow functions, template literals, destructuring,
+    spread, classes, DOM selection, element creation, <code>classList</code>, event listeners, event delegation, <code>dataset</code>.</p>
+</section>
+
+<!-- ============================ SUMMARY ============================ -->
+<section id="summary">
+  <h2>7 · Summary</h2>
+  <table>
+    <thead><tr><th>Topic</th><th>Key concepts</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">ES6</th><td><code>let</code>/<code>const</code>, arrow functions, template literals, destructuring, spread/rest, classes, modules, promises</td></tr>
+      <tr><th scope="row">DOM</th><td><code>querySelector</code>, <code>createElement</code>, <code>appendChild</code>, <code>classList</code>, <code>style</code>, <code>innerHTML</code>, <code>textContent</code></td></tr>
+      <tr><th scope="row">Events</th><td><code>addEventListener</code>, event object, bubbling, <code>preventDefault</code>, <code>stopPropagation</code>, delegation</td></tr>
+    </tbody>
+  </table>
+
+  <h3>8 · Common errors</h3>
+  <table>
+    <thead><tr><th>Error</th><th>Cause</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td>Cannot read property of null</td><td>Selecting before the DOM loads</td><td>Script at end of <code>&lt;body&gt;</code>, or <code>DOMContentLoaded</code></td></tr>
+      <tr><td>Handler not firing</td><td>Element not created yet</td><td>Event delegation, or wait for DOM load</td></tr>
+      <tr><td><code>innerHTML</code> not updating</td><td>Typo in selector</td><td>Check <code>id</code>/<code>class</code> spelling</td></tr>
+      <tr><td>Arrow function <code>this</code></td><td>No own <code>this</code></td><td>Use a regular function for dynamic <code>this</code></td></tr>
+      <tr><td>Module import fails</td><td>Missing <code>type="module"</code> (or opened as <code>file://</code>)</td><td><code>&lt;script type="module" src="…"&gt;</code>, serve over HTTP</td></tr>
+    </tbody>
+  </table>
+  <pre class="out" id="out-ready"></pre>
+</section>
+
+</main>
+
+<footer>
+  <p>Experiment 07 &amp; 08 · Backend Development lab · Suryansh (<code>smirk-dev</code>)</p>
+</footer>
+
+<script type="module" src="js/es6.js"></script>
+<script type="module" src="js/dom.js"></script>
+<script type="module" src="js/events.js"></script>
+</body>
+</html>
