@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learnings: ES6, DOM and events (Experiment 07 &amp; 08)</title>
+</head>
+<body>
+
+<h1>Learnings: ES6, DOM manipulation and event handling</h1>
+<p><a href="index.html">Back to all experiments</a> | <a href="Lab/Exp07_08-ES6-DOM-Events/">Live demos</a></p>
+
+<h2>1. ES6 features</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+<thead><tr><th>Feature</th><th>What it does</th><th>What we saw when running it</th></tr></thead>
+<tbody>
+<tr><td>let, const</td><td>Block-scoped variables; const cannot be reassigned</td><td>Reassigning a const throws TypeError. A let inside an if block is a ReferenceError outside it; a var leaks out.</td></tr>
+<tr><td>Arrow functions</td><td>Short syntax; no own <code>this</code></td><td>Inside a method, an arrow callback updated the outer object's count; a plain function callback could not.</td></tr>
+<tr><td>Template literals</td><td>Backticks, <code>${expression}</code>, multi-line</td><td>Replaces string concatenation; expressions like <code>${5 + 3}</code> work.</td></tr>
+<tr><td>Destructuring</td><td>Unpack arrays and objects into variables</td><td>Supports skipping items, renaming and default values.</td></tr>
+<tr><td>Spread, rest</td><td><code>...</code> expands or collects</td><td>Spread makes a copy that is a different object with the same items. Rest gathers function arguments.</td></tr>
+<tr><td>Default parameters</td><td>Fallback when an argument is missing</td><td><code>greet()</code> returned "Hello, Guest!".</td></tr>
+<tr><td>Classes</td><td>Cleaner constructors, extends, static methods</td><td>A subclass instance is also an instance of its parent.</td></tr>
+<tr><td>Modules</td><td>import and export between files</td><td>Needs <code>type="module"</code> and an HTTP server (see section 4).</td></tr>
+<tr><td>Promises, async/await</td><td>Handle work that finishes later</td><td>Both styles gave the same result after one second; await reads like normal code.</td></tr>
+<tr><td>Object literal shorthand</td><td>Shorthand properties and methods, computed keys</td><td><code>{ [key]: "value" }</code> built a property from a variable.</td></tr>
+</tbody>
+</table>
+
+<h2>2. DOM manipulation</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+<thead><tr><th>Task</th><th>Tool</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td>Select one element</td><td>getElementById, querySelector</td><td>querySelector takes any CSS selector and returns the first match.</td></tr>
+<tr><td>Select many</td><td>getElementsByClassName, getElementsByTagName, querySelectorAll</td><td>The first two return a live HTMLCollection; querySelectorAll returns a static NodeList that has forEach.</td></tr>
+<tr><td>Change text</td><td>textContent, innerText, innerHTML</td><td>innerHTML parses markup, so never give it user input.</td></tr>
+<tr><td>Attributes</td><td>getAttribute, setAttribute, removeAttribute, or the property</td><td>The attribute holds what was written; <code>link.href</code> returns the full resolved address.</td></tr>
+<tr><td>Styles</td><td>element.style, classList add, remove, toggle, contains</td><td>Prefer classes over inline styles.</td></tr>
+<tr><td>Add elements</td><td>createElement with appendChild, append, prepend, before, after, insertBefore</td><td>Inserting an element that is already in the page moves it; it does not copy it.</td></tr>
+<tr><td>Remove elements</td><td>element.remove()</td><td>Replaces the older parentNode.removeChild.</td></tr>
+<tr><td>Walk the tree</td><td>parentElement, children, firstElementChild, lastElementChild, previousElementSibling, nextElementSibling</td><td>The Element versions skip text nodes; the plain versions do not.</td></tr>
+</tbody>
+</table>
+
+<h2>3. Event handling</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+<thead><tr><th>Idea</th><th>What we saw</th></tr></thead>
+<tbody>
+<tr><td>Three ways to attach a handler</td><td>An HTML attribute works but mixes code into markup. The onclick property allows one handler: assigning twice replaced the first. addEventListener stacks, and both handlers ran.</td></tr>
+<tr><td>Event object</td><td>Carries type, target, clientX, clientY, timeStamp, key, code and modifier keys.</td></tr>
+<tr><td>Form events</td><td>submit needs preventDefault to stop the page reload; input fires on every keystroke; change fires when a value is committed.</td></tr>
+<tr><td>Bubbling</td><td>Clicking the inner button logged "Inner clicked" then "Outer clicked".</td></tr>
+<tr><td>Capturing</td><td>A listener registered with the capture flag on the outer element ran before the inner one.</td></tr>
+<tr><td>stopPropagation</td><td>With it on, the outer bubbling handler did not run.</td></tr>
+<tr><td>preventDefault</td><td>A link click was handled but the browser did not navigate.</td></tr>
+<tr><td>Delegation</td><td>One listener on the list handled a task added afterwards, with no new listener attached.</td></tr>
+</tbody>
+</table>
+
+<h2>4. Mistakes and traps that cost time</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+<thead><tr><th>Trap</th><th>Cause</th><th>Fix</th></tr></thead>
+<tbody>
+<tr>
+<td>One script silently stopped working with "Identifier '$' has already been declared"</td>
+<td>Two classic scripts on one page each declared <code>const $</code> at top level. Classic scripts share one global scope for const and let, so the second file failed to load at all.</td>
+<td>Load them as <code>type="module"</code>; each module has its own scope. Otherwise wrap the code in a function or block.</td>
+</tr>
+<tr>
+<td>Modules do not run when the file is double-clicked</td>
+<td>Browsers block module loading from file:// addresses.</td>
+<td>Serve the folder over HTTP, for example <code>py -3 -m http.server 8000</code>.</td>
+</tr>
+<tr>
+<td>Checks returned "undefined" for every panel</td>
+<td>The test server was started in the wrong folder and answered 404.</td>
+<td>Check the status code with curl before debugging the page.</td>
+</tr>
+<tr>
+<td>XSS through innerHTML</td>
+<td>innerHTML turns a string into real elements, and an element such as an image with an onerror attribute can run script.</td>
+<td>Use textContent for untrusted text. The demo shows the same string as inert text in one box and as a real element in the other (without a live script).</td>
+</tr>
+<tr>
+<td>Handlers not firing for new elements</td>
+<td>Listeners attached directly to elements only cover elements that existed at that moment.</td>
+<td>Use event delegation on a parent.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>5. How it was checked</h2>
+<p>The page was opened in headless Chrome and driven through the DevTools protocol. Every button was clicked, every output panel was read back and compared with the expected result, and the console was watched for errors. The To-Do app was tested for adding by button and by the Enter key, toggling and deleting.</p>
+
+<h2>6. Rules of thumb</h2>
+<ul>
+<li>Use const by default, let when you must reassign, and avoid var.</li>
+<li>Use addEventListener, not inline handlers.</li>
+<li>Use classList for styling changes.</li>
+<li>Use textContent for text; use innerHTML only for markup you wrote yourself.</li>
+<li>Delegate events to a parent when items are created and removed dynamically.</li>
+<li>When something silently does nothing, look at the browser console first.</li>
+</ul>
+
+</body>
+</html>

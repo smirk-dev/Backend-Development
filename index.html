@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Backend Development Lab (CSFS3008P) - all experiments</title>
+</head>
+<body>
+
+<h1>Backend Development Lab (CSFS3008P)</h1>
+<p>B.Tech Full Stack, Semester 5, UPES. Student: Suryansh (smirk-dev). Instructor: Dr. Prateek Raj Gautam.</p>
+<p>Source: <a href="https://github.com/smirk-dev/Backend-Development">github.com/smirk-dev/Backend-Development</a>.
+Lab manuals: <a href="https://upessocs.github.io">upessocs.github.io</a>.
+<a href="learnings.html">Learnings from Experiment 07 &amp; 08</a>.</p>
+
+<h2>Experiments</h2>
+<p>Static experiments run right here (live link). Server experiments need Node.js and, where noted, MongoDB, so they link to source only.</p>
+
+<table border="1" cellpadding="6" cellspacing="0">
+<thead>
+<tr><th>#</th><th>Experiment</th><th>Stack</th><th>Live</th><th>Source</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>A web page using all 110 non-deprecated HTML5 elements, with local SVG diagrams and generated media</td>
+<td>HTML, CSS, JS</td>
+<td><a href="Lab/Exp01-HTML5-Elements/">Open</a></td>
+<td><a href="https://github.com/smirk-dev/Backend-Development/tree/main/Lab/Exp01-HTML5-Elements">Folder</a></td>
+</tr>
+<tr>
+<td>02</td>
+<td>A web page with all types of CSS</td>
+<td>-</td>
+<td>Not started</td>
+<td>-</td>
+</tr>
+<tr>
+<td>07 &amp; 08</td>
+<td>ES6, DOM manipulation and event handling: every manual section as a live demo, plus the To-Do app</td>
+<td>HTML, CSS, JS (ES modules)</td>
+<td><a href="Lab/Exp07_08-ES6-DOM-Events/">Demos</a>, <a href="Lab/Exp07_08-ES6-DOM-Events/todo/">To-Do app</a></td>
+<td><a href="https://github.com/smirk-dev/Backend-Development/tree/main/Lab/Exp07_08-ES6-DOM-Events">Folder</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>Node.js, Express and EJS, Parts A-C: response methods, route and query params, POST bodies, six-operation calculator, EJS views</td>
+<td>Node.js, Express, EJS</td>
+<td>Needs a server</td>
+<td><a href="https://github.com/smirk-dev/Backend-Development/tree/main/Lab/Exp12-NodeJS-Express-EJS">Folder</a></td>
+</tr>
+<tr>
+<td>12B</td>
+<td>State management: sessions vs cookies, login with hashed passwords (bcryptjs), per-session to-do list, theme cookie</td>
+<td>Node.js, Express, express-session</td>
+<td>Needs a server</td>
+<td><a href="https://github.com/smirk-dev/Backend-Development/tree/main/Lab/Exp12B-State-Management">Folder</a></td>
+</tr>
+<tr>
+<td>13A</td>
+<td>User registration and login with Express and Mongoose against local MongoDB (signup, login, list users)</td>
+<td>Node.js, Express, Mongoose, MongoDB</td>
+<td>Needs a server and MongoDB</td>
+<td><a href="https://github.com/smirk-dev/Backend-Development/tree/main/Lab/Exp13A-MongoDB-Mongoose-UserAuth">Folder</a></td>
+</tr>
+<tr>
+<td>Exam 01</td>
+<td>Lab examination: "My Notes" app with add, edit, delete, search, category filter, validation and a live database inspector page</td>
+<td>Node.js, Express, EJS, MongoDB driver</td>
+<td>Needs a server and MongoDB</td>
+<td><a href="https://github.com/smirk-dev/Backend-Development/tree/main/Lab/Exam01-Notes-App">Folder</a></td>
+</tr>
+</tbody>
+</table>
+
+<h2>Theory tasks</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+<thead>
+<tr><th>Task</th><th>What it is</th><th>Source</th></tr>
+</thead>
+<tbody>
+<tr><td>Task 1</td><td>Node.js Express server with a student list (EJS view engine)</td><td><a href="https://github.com/smirk-dev/Backend-Development/tree/main/Theory/Task1">Folder</a></td></tr>
+<tr><td>Task 2</td><td>Flask JSON API for students, plus EJS views</td><td><a href="https://github.com/smirk-dev/Backend-Development/tree/main/Theory/Task2">Folder</a></td></tr>
+<tr><td>Task 3</td><td>FastAPI student management API with Pydantic models</td><td><a href="https://github.com/smirk-dev/Backend-Development/tree/main/Theory/Task3">Folder</a></td></tr>
+</tbody>
+</table>
+
+<h2>How to run an experiment locally</h2>
+<table border="1" cellpadding="6" cellspacing="0">
+<thead><tr><th>Kind</th><th>Command</th></tr></thead>
+<tbody>
+<tr><td>Static (01, 07 &amp; 08)</td><td><code>py -3 -m http.server 8000</code> from the experiment folder, then open http://localhost:8000</td></tr>
+<tr><td>Node (12, 12B, 13A, Exam 01)</td><td><code>npm install</code> then <code>npm start</code> from the experiment folder, then open http://localhost:3000</td></tr>
+<tr><td>MongoDB experiments (13A, Exam 01)</td><td>A MongoDB server on localhost:27017 must be running first</td></tr>
+</tbody>
+</table>
+
+</body>
+</html>
